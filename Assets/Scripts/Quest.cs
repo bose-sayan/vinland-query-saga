@@ -23,15 +23,35 @@ public class Quest : MonoBehaviour
 
     [Header("Score")] [SerializeField] private TextMeshProUGUI score;
 
-    private bool _hasAnswered;
-    private float _correctAnswers, _questionsAnsweredSoFar;
+    [Header("Progress Bar")] [SerializeField]
+    private Slider progressBar;
 
+    private bool _hasAnswered;
+    private float _correctAnswers, _questionsSeenSoFar, _totalQuestions;
+    [SerializeField] public bool hasSeenAllQuestions;
+
+
+    // getters
+    public int GetNumberOfCorrectAnswers()
+    {
+        return (int)_correctAnswers;
+    }
+
+    public int GetTotalNumberOfQuestions()
+    {
+        return (int)_totalQuestions;
+    }
 
     private void Start()
     {
-        _questionsAnsweredSoFar = 0;
+        _questionsSeenSoFar = 0;
         _correctAnswers = 0;
+        _totalQuestions = questions.Count;
         _hasAnswered = false;
+        progressBar.minValue = 0;
+        progressBar.maxValue = questions.Count;
+        progressBar.wholeNumbers = true;
+        progressBar.interactable = false;
 
         PickRandomQuestion();
         InitializeQuestion();
@@ -51,8 +71,13 @@ public class Quest : MonoBehaviour
             OnSelectOption(-1);
         }
 
-        if (_questionsAnsweredSoFar > 0)
-            score.text = "Score: " + Math.Floor(_correctAnswers / _questionsAnsweredSoFar * 100) + "%";
+        if (_questionsSeenSoFar > 0)
+            score.text = "Score: " + Math.Floor(_correctAnswers / _questionsSeenSoFar * 100) + "%";
+
+        if (!timer.isAnswering && progressBar.value == progressBar.maxValue)
+        {
+            hasSeenAllQuestions = true;
+        }
     }
 
     private void InitializeQuestion()
@@ -65,11 +90,12 @@ public class Quest : MonoBehaviour
         }
 
         correctOptionIndex = currentQuestion.GetCorrectOptionIndex();
+        progressBar.value++;
     }
 
     public void OnSelectOption(int selectedOptionIndex)
     {
-        _questionsAnsweredSoFar++;
+        _questionsSeenSoFar++;
         if (selectedOptionIndex == correctOptionIndex)
         {
             DisplayResult(0);

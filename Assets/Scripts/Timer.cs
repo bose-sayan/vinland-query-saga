@@ -28,6 +28,9 @@ public class Timer : MonoBehaviour
         if (_timeLeft > 0) return;
 
         // Timer has run out
+
+        
+        
         // Toggle state from answering to viewing or vice versa
         if (isAnswering)
         {
