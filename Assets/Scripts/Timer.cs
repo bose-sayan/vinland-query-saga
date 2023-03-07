@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     private float _timeLeft;
-    public bool isAnswering;
-    public bool canLoadNextQuestion;
+    [SerializeField] public bool isAnswering;
+    [SerializeField] public bool canLoadNextQuestion;
 
     [SerializeField] private float displayQuestionTime = 7f, displayAnswerTime = 4f;
     [SerializeField] private Image timerImage;
@@ -29,8 +29,7 @@ public class Timer : MonoBehaviour
 
         // Timer has run out
 
-        
-        
+
         // Toggle state from answering to viewing or vice versa
         if (isAnswering)
         {

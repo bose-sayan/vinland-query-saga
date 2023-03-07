@@ -27,7 +27,7 @@ public class Quest : MonoBehaviour
     private Slider progressBar;
 
     private bool _hasAnswered;
-    private float _correctAnswers, _questionsSeenSoFar, _totalQuestions;
+    private float _correctAnswers, _totalQuestions;
     [SerializeField] public bool hasSeenAllQuestions;
 
 
@@ -42,9 +42,9 @@ public class Quest : MonoBehaviour
         return (int)_totalQuestions;
     }
 
+
     private void Start()
     {
-        _questionsSeenSoFar = 0;
         _correctAnswers = 0;
         _totalQuestions = questions.Count;
         _hasAnswered = false;
@@ -62,6 +62,12 @@ public class Quest : MonoBehaviour
         timer.UpdateTimer();
         if (timer.canLoadNextQuestion)
         {
+            if (timer.isAnswering && progressBar.value == progressBar.maxValue)
+            {
+                hasSeenAllQuestions = true;
+                return;
+            }
+
             _hasAnswered = false;
             GetNextQuestion();
             timer.canLoadNextQuestion = false;
@@ -71,13 +77,7 @@ public class Quest : MonoBehaviour
             OnSelectOption(-1);
         }
 
-        if (_questionsSeenSoFar > 0)
-            score.text = "Score: " + Math.Floor(_correctAnswers / _questionsSeenSoFar * 100) + "%";
-
-        if (!timer.isAnswering && progressBar.value == progressBar.maxValue)
-        {
-            hasSeenAllQuestions = true;
-        }
+        score.text = "Score: " + Math.Floor(_correctAnswers / _totalQuestions * 100) + "%";
     }
 
     private void InitializeQuestion()
@@ -95,7 +95,7 @@ public class Quest : MonoBehaviour
 
     public void OnSelectOption(int selectedOptionIndex)
     {
-        _questionsSeenSoFar++;
+        _hasAnswered = true;
         if (selectedOptionIndex == correctOptionIndex)
         {
             DisplayResult(0);
@@ -111,7 +111,6 @@ public class Quest : MonoBehaviour
             return;
         }
 
-        _hasAnswered = true;
         timer.CancelTimer();
     }
 
@@ -126,10 +125,10 @@ public class Quest : MonoBehaviour
         else if (result == 1)
         {
             // incorrect answer
+            questionText.color = Color.red;
             questionText.text = "Incorrect!\n";
             questionText.text +=
                 "Answer is: " + options[correctOptionIndex].GetComponentInChildren<TextMeshProUGUI>().text;
-            questionText.color = Color.red;
         }
         else
         {
