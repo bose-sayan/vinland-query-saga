@@ -443,7 +443,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 227723891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 823803829}
+        m_TargetAssemblyTypeName: Quest, Assembly-CSharp
+        m_MethodName: onSelectOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &227723891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +737,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 602441539}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 823803829}
+        m_TargetAssemblyTypeName: Quest, Assembly-CSharp
+        m_MethodName: onSelectOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &602441539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,6 +867,7 @@ GameObject:
   - component: {fileID: 823803827}
   - component: {fileID: 823803826}
   - component: {fileID: 823803825}
+  - component: {fileID: 823803829}
   m_Layer: 5
   m_Name: Quiz Canvas
   m_TagString: Untagged
@@ -933,6 +958,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &823803829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823803824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 098106f615f944f468408c27a3d813f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  question: {fileID: 11400000, guid: d2221a5a02ee3c5479a582572789436c, type: 2}
+  questionText: {fileID: 1614128225}
+  options:
+  - {fileID: 227723888}
+  - {fileID: 1222952011}
+  - {fileID: 602441536}
+  - {fileID: 1803271314}
+  correctOptionIndex: 0
+  defaultOptionSprite: {fileID: 21300000, guid: c84b11ed0931f3c46b383f12f77e6477, type: 3}
+  correctOptionSprite: {fileID: 21300000, guid: 32a08e0b92002a34b8568eed13ff76e0, type: 3}
 --- !u!1 &854372265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1139,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1222952014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 823803829}
+        m_TargetAssemblyTypeName: Quest, Assembly-CSharp
+        m_MethodName: onSelectOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1222952014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vinland Query Saga
+  m_text: Vinland Quest Saga
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd53b6eecbc7a87418da5bb55580fc3f, type: 2}
   m_sharedMaterial: {fileID: 3272671468137226625, guid: cd53b6eecbc7a87418da5bb55580fc3f, type: 2}
@@ -1335,8 +1394,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294305704
+  m_fontColor: {r: 0.6581524, g: 0.90645045, b: 0.9622642, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1389,7 +1448,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1093.0074, w: -200.24371}
+  m_margin: {x: 0, y: 0, z: -1093.0074, w: -153.01544}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1554,7 +1613,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1803271317}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 823803829}
+        m_TargetAssemblyTypeName: Quest, Assembly-CSharp
+        m_MethodName: onSelectOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1803271317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1746,7 +1817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1878861298
 MonoBehaviour:
   m_ObjectHideFlags: 0
