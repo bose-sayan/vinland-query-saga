@@ -3,25 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class Quest : MonoBehaviour
 {
-    [Header("Question")] [SerializeField] private QuestionSO question;
+    [Header("Questions")] [SerializeField] private List<QuestionSO> questions = new List<QuestionSO>();
+    [SerializeField] private QuestionSO currentQuestion;
     [SerializeField] private TextMeshProUGUI questionText;
-    [Header("Answer")] [SerializeField] private GameObject[] options;
+
+    [Header("Answers")] [SerializeField] private GameObject[] options;
     [SerializeField] private int correctOptionIndex;
-    [Header("Sprite")] [SerializeField] private Sprite defaultOptionSprite;
+
+    [Header("Sprites")] [SerializeField] private Sprite defaultOptionSprite;
     [SerializeField] private Sprite correctOptionSprite;
+
     [Header("Timer")] [SerializeField] private Timer timer;
 
+    [Header("Score")] [SerializeField] private TextMeshProUGUI score;
+
     private bool _hasAnswered;
+    private float _correctAnswers, _questionsAnsweredSoFar;
 
 
     private void Start()
     {
-        InitializeQuestion();
+        _questionsAnsweredSoFar = 0;
+        _correctAnswers = 0;
         _hasAnswered = false;
+
+        PickRandomQuestion();
+        InitializeQuestion();
     }
 
     private void Update()
@@ -37,25 +50,30 @@ public class Quest : MonoBehaviour
         {
             OnSelectOption(-1);
         }
+
+        if (_questionsAnsweredSoFar > 0)
+            score.text = "Score: " + Math.Floor(_correctAnswers / _questionsAnsweredSoFar * 100) + "%";
     }
 
     private void InitializeQuestion()
     {
-        questionText.text = question.GetQuestion();
+        questionText.text = currentQuestion.GetQuestion();
         questionText.color = Color.cyan;
         for (var i = 0; i < options.Length; i++)
         {
-            options[i].GetComponentInChildren<TextMeshProUGUI>().text = question.GetOption(i);
+            options[i].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.GetOption(i);
         }
 
-        correctOptionIndex = question.GetCorrectOptionIndex();
+        correctOptionIndex = currentQuestion.GetCorrectOptionIndex();
     }
 
     public void OnSelectOption(int selectedOptionIndex)
     {
+        _questionsAnsweredSoFar++;
         if (selectedOptionIndex == correctOptionIndex)
         {
             DisplayResult(0);
+            _correctAnswers++;
         }
         else if (selectedOptionIndex != -1)
         {
@@ -111,9 +129,18 @@ public class Quest : MonoBehaviour
 
     private void GetNextQuestion()
     {
-        InitializeQuestion();
+        if (questions.Count == 0) return;
         SetButtonState(true);
         SetDefaultButtonSprites();
+        PickRandomQuestion();
+        InitializeQuestion();
+    }
+
+    private void PickRandomQuestion()
+    {
+        int index = new Random().Next(0, questions.Count);
+        currentQuestion = questions[index];
+        questions.RemoveAt(index);
     }
 
     private void SetDefaultButtonSprites()
